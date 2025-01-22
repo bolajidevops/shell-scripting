@@ -16,7 +16,7 @@
   `aws iam create-user --user-name "$user"`
 'done'
 
-### The below translate that automation_users in arrays contains five IAM user names.
+### The below translate that automation_user in arrays contains five IAM user names.
 
 `automation_users=("user1" "user2" "user3" "user4" "user5")`
 
