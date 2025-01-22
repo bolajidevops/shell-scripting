@@ -5,24 +5,24 @@
 
 *# IAM Management*
 *# Declaring an array with five IAM user names*
-'automation_user=("user1" "user2" "user3" "user4" "user5")'
+`automation_user=("user1" "user2" "user3" "user4" "user5")`
 
 *#Loop through the array to create IAM users*
-'for user in "${automation_user[@]}"; do'
-  'echo "Creating IAM user: $user"'
-  'aws iam create-user --user-name "$user"'
+`for user in "${automation_user[@]}"; do`
+  `echo "Creating IAM user: $user"`
+  `aws iam create-user --user-name "$user"`
 'done'
 
 ### The below translate that automation_users in arrays contains five IAM user names.
-'automation_users=("user1" "user2" "user3" "user4" "user5")'
+`automation_users=("user1" "user2" "user3" "user4" "user5")`
 
 ### Loop Through the Array:
 This loops through each element in the array, storing the current element in the variable user.
-'for user in "${iam_users[@]}"; do'
+`for user in "${iam_users[@]}"; do`
 
 ## Create IAM Users:
 The AWS CLI command creates an IAM user with the name stored in user.
-'aws iam create-user --user-name "$user"'
+`aws iam create-user --user-name "$user"`
 
 
 The image below shows how the users are been created on my AWS CLI after which the script have been executed.
@@ -31,45 +31,45 @@ The image below shows how the users are been created on my AWS CLI after which t
 
 ### Defining function to create an IAM group named "admin" using the AWS CLI.
 
-'create_admin_group() {'
-'group_name="admin"'
-'echo "Creating IAM group: $group_name"'
+`create_admin_group() {`
+`group_name="admin"`
+`echo "Creating IAM group: $group_name"`
 
 The below specifies the group name as "admin".
-'group_name="admin"'
+`group_name="admin"`
 
 The below code is use to call the function to execute and it comes at the end of the script.
-'create_admin_group'
+`create_admin_group`
 
  ## Create the group
  The below creates the IAM group with the specified name.
-'aws iam create-group --group-name "$group_name"'
+`aws iam create-group --group-name "$group_name"`
 
 ## Attaching Administrative Policy to Group:
 
-'aws iam attach-group-policy --group-name admin --policy-arn arn:aws:iam::aws:policy/AdministratorAccess'
+`aws iam attach-group-policy --group-name admin --policy-arn arn:aws:iam::aws:policy/AdministratorAccess`
 
 This below attaches a policy to an IAM group.
-'aws iam attach-group-policy'
+`aws iam attach-group-policy`
 
 Below Specifies the name of the IAM group to which the policy will be attached (in this case, admin).
- '--group-name'
+ `--group-name`
 
 Below Specifies the Amazon Resource Name (ARN) of the policy to attach. For AdministratorAccess, the ARN is: arn:aws:iam::aws:policyAdministratorAccess
- '--policy-arn'
+ `--policy-arn`
 
 
-## Error Checking:
+### Error Checking:
 
  *#Check the exit status*
-  'if [[ $? -eq 0 ]]; then'
-    'echo "IAM group '$group_name' created successfully."'
-  'else'
-    'echo "Failed to create IAM group '$group_name'. Please check for errors."'
-  'fi'
-'}'
 
-The $? variable checks the exit status of the previous command. A value of 0 indicates success.
+  `if [[ $? -eq 0 ]]; then`
+    `echo "IAM group '$group_name' created successfully."`
+  `else`
+    `echo "Failed to create IAM group '$group_name'. Please check for errors."`
+  `fi`
+`}`
+The $? variable checks the exit status of the previous command. A value 0 indicates success.
 
 ### If successful: The output display below
 Creating IAM group: admin
@@ -86,7 +86,7 @@ Failed to create IAM group 'admin'. Please check for errors.
 automation_user=("user1" "user2" "user3" "user4" "user5")
 
 ### IAM group name
-'group_name="admin"'
+`group_name="admin"`
 
 ### Iterate through the array and add each user to the "admin" group
 
@@ -97,17 +97,17 @@ for user in "${automation_user[@]}"; do
 
   ### Add user to the group
   The aws iam add-user-to-group command assigns the user to the group.
-  'aws iam add-user-to-group --user-name "$user" --group-name "$group_name"'
+  `aws iam add-user-to-group --user-name "$user" --group-name "$group_name"`
 
   ### Check the exit status
 
   The exit status ($?) is checked to ensure the command succeeded.
-  'if [[ $? -eq 0 ]]; then'
-    'echo "Successfully added '$user' to the '$group_name' group."'
-  'else'
-    'echo "Failed to add '$user' to the '$group_name' group. Please check for errors."'
-  'fi'
-'done'
+  `if [[ $? -eq 0 ]]; then`
+    `echo "Successfully added '$user' to the '$group_name' group."`
+  `else`
+    `echo "Failed to add '$user' to the '$group_name' group. Please check for errors."`
+  `fi`
+`done`
 
 ### Output Success:
 Adding IAM user 'user1' to group 'admin'...
